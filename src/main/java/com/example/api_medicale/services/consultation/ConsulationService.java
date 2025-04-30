@@ -47,7 +47,7 @@ public class ConsulationService implements IConsultationService{
 
         existingConsultation.setDate(dto.getDate());
         existingConsultation.setNumero(dto.getNumero());
-
+        repository.save(existingConsultation);
         return this.toDto(existingConsultation);
     }
 
