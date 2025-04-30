@@ -10,5 +10,6 @@ public interface IPatientService {
     PatientDto save(PatientDto dto);
     PatientDto findById(Long id);
     void delete(Long id);
+    PatientDto update(PatientDto dto);
     Page<PatientDto> findAll(String search, int page, int size);
 }

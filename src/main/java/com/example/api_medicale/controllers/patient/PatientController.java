@@ -30,6 +30,12 @@ public class PatientController {
     public PatientDto getById(@PathVariable Long id) {
         return patientService.findById(id);
     }
+    @PutMapping("/{id}")
+    @Operation(summary = "Modifier un patient par id")
+    public PatientDto update(@PathVariable Long id, @RequestBody PatientDto dto){
+        dto.setId(id);
+        return patientService.update(dto);
+    }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Supprimer le patient par id")
