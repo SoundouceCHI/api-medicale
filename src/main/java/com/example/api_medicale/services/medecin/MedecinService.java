@@ -2,6 +2,7 @@ package com.example.api_medicale.services.medecin;
 
 import com.example.api_medicale.dto.MedecinDto;
 import com.example.api_medicale.entities.Medecin;
+import com.example.api_medicale.mappers.MedecinMapper;
 import com.example.api_medicale.repositories.IMedecinRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
@@ -13,9 +14,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class MedecinService implements IMedecinService{
     private IMedecinRepository repository;
+    private MedecinMapper medecinMapper;
 
-    public MedecinService(IMedecinRepository repository){
+    public MedecinService(IMedecinRepository repository, MedecinMapper medecinMapper){
         this.repository= repository;
+        this.medecinMapper=medecinMapper;
     }
     @Override
     public Page<MedecinDto> findAll(String search, int page, int size) {
@@ -56,19 +59,9 @@ public class MedecinService implements IMedecinService{
     }
 
     private MedecinDto toDTO(Medecin m) {
-        MedecinDto dto = new MedecinDto();
-        dto.setId(m.getId());
-        dto.setNom(m.getNom());
-        dto.setPrenom(m.getPrenom());
-        dto.setMatricule(m.getMatricule());
-        return dto;
+        return medecinMapper.toDto(m);
     }
     private Medecin toEntity(MedecinDto dto){
-        Medecin m = new Medecin();
-        m.setId(dto.getId());
-        m.setNom(dto.getNom());
-        m.setPrenom(dto.getPrenom());
-        m.setMatricule(dto.getMatricule());
-        return m;
+        return medecinMapper.toEntity(dto);
     }
 }

@@ -15,11 +15,11 @@ import java.util.List;
 @Service
 public class PatientService implements IPatientService {
     private final IPatientRepository repository;
-    //private final PatientMapper patientMapper;
+    private final PatientMapper patientMapper;
 
-    public PatientService(IPatientRepository repository /*,PatientMapper patientMapper*/) {
+    public PatientService(IPatientRepository repository ,PatientMapper patientMapper) {
         this.repository = repository;
-       // this.patientMapper= patientMapper;
+       this.patientMapper= patientMapper;
     }
 
     @Override
@@ -58,23 +58,12 @@ public class PatientService implements IPatientService {
     }
 
     private PatientDto toDTO(Patient p) {
-        PatientDto dto = new PatientDto();
-        dto.setId(p.getId());
-        dto.setNom(p.getNom());
-        dto.setPrenom(p.getPrenom());
-        dto.setNumSecuSoc(p.getNumSecuSoc());
-        //return patientMapper.toDto(p);
-        return dto;
+        return patientMapper.toDto(p);
+
     }
 
     private Patient toEntity(PatientDto dto) {
-        Patient p = new Patient();
-        p.setId(dto.getId());
-        p.setNom(dto.getNom());
-        p.setPrenom(dto.getPrenom());
-        p.setNumSecuSoc(dto.getNumSecuSoc());
-        return p;
-//        return patientMapper.toEntity(dto);
+        return patientMapper.toEntity(dto);
     }
     @Override
     public Page<PatientDto> findAll(String search, int page, int size) {
