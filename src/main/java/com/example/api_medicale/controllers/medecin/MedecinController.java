@@ -11,7 +11,7 @@ import org.springframework.data.domain.Page;
 @RestController
 @RequestMapping("/api/medecin")
 public class MedecinController {
-    private MedecinService medecinService;
+    private final MedecinService medecinService;
 
     public MedecinController(MedecinService medecinService){
         this.medecinService = medecinService;

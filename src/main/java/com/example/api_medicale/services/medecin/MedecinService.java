@@ -2,7 +2,7 @@ package com.example.api_medicale.services.medecin;
 
 import com.example.api_medicale.dto.MedecinDto;
 import com.example.api_medicale.entities.Medecin;
-import com.example.api_medicale.mappers.MedecinMapper;
+import com.example.api_medicale.mappers.IMedecinMapper;
 import com.example.api_medicale.repositories.IMedecinRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class MedecinService implements IMedecinService{
     private IMedecinRepository repository;
-    private MedecinMapper medecinMapper;
+    private IMedecinMapper mapper;
 
-    public MedecinService(IMedecinRepository repository, MedecinMapper medecinMapper){
+    public MedecinService(IMedecinRepository repository, IMedecinMapper mapper){
         this.repository= repository;
-        this.medecinMapper=medecinMapper;
+        this.mapper = mapper;
     }
     @Override
     public Page<MedecinDto> findAll(String search, int page, int size) {
@@ -59,9 +59,9 @@ public class MedecinService implements IMedecinService{
     }
 
     private MedecinDto toDTO(Medecin m) {
-        return medecinMapper.toDto(m);
+        return mapper.toDto(m);
     }
     private Medecin toEntity(MedecinDto dto){
-        return medecinMapper.toEntity(dto);
+        return mapper.toEntity(dto);
     }
 }

@@ -4,7 +4,7 @@ import com.example.api_medicale.entities.Medecin;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface MedecinMapper {
-    MedecinDto toDto(Medecin patient);
+public interface IMedecinMapper {
+    MedecinDto toDto(Medecin medecin);
     Medecin toEntity(MedecinDto dto);
 }
