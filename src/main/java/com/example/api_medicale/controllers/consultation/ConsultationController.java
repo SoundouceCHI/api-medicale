@@ -2,8 +2,13 @@ package com.example.api_medicale.controllers.consultation;
 
 
 import com.example.api_medicale.dto.ConsultationDto;
+import com.example.api_medicale.dto.MedicamentPrescritDTO;
 import com.example.api_medicale.services.consultation.ConsulationService;
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,6 +52,26 @@ public class ConsultationController {
     public void delete(@PathVariable Long id){
         service.delete(id);
     }
+
+    @GetMapping("/consultations/patient/{id}")
+    @Operation(summary = "Lister les consultations d’un patient avec pagination")
+    public Page<ConsultationDto> getConsultationsByPatient(
+            @PathVariable Long id,
+            @PageableDefault(size = 10, sort = "date", direction = Sort.Direction.DESC) Pageable pageable) {
+        return service.getConsultationsDtoByPatientId(id, pageable);
+    }
+
+    @GetMapping("/medecin/{medecinId}")
+    @Operation(summary = "Récupérer toutes les consultations d'un médecin")
+    public List<ConsultationDto> getConsultationsByMedecin(@PathVariable Long medecinId) {
+        return service.getConsultationsDtoByMedecinId(medecinId);
+    }
+    @GetMapping("/{id}/medicaments")
+    @Operation(summary = "Récuperer tous les medicaments prescrits dans une consultation")
+    public List<MedicamentPrescritDTO> getMedicamentsPrescrits(@PathVariable Long id) {
+        return service.getMedicamentsByConsultation(id);
+    }
+
 
 
 }
