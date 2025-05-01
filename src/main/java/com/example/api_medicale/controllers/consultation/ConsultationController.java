@@ -72,6 +72,30 @@ public class ConsultationController {
         return service.getMedicamentsByConsultation(id);
     }
 
+    @PostMapping("/{id}/prescrition")
+    @Operation(summary = "Ajouter une prescription à une consultation")
+    public ConsultationDto addPrescription(@PathVariable Long id, @RequestBody MedicamentPrescritDTO medPrescDto) {
+        return service.addPrescription(id, medPrescDto);
+    }
+
+    @PutMapping("/{id}/prescription/{medicamentId}")
+    @Operation(summary = "Modifier une prescription d’une consultation")
+    public ConsultationDto updatePrescription(
+            @PathVariable Long id,
+            @PathVariable Long medicamentId,
+            @RequestBody MedicamentPrescritDTO dto
+    ) {
+        return service.updatePrescription(id, medicamentId, dto);
+    }
+
+    @DeleteMapping("/{id}/prescription/{medicamentId}")
+    @Operation(summary = "Supprimer une prescription d’une consultation")
+    public void deletePrescription(
+            @PathVariable Long id,
+            @PathVariable Long medicamentId
+    ) {
+        service.deletePrescription(id, medicamentId);
+    }
 
 
 }

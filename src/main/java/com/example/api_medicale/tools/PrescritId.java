@@ -1,11 +1,15 @@
 package com.example.api_medicale.tools;
 
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
+@AllArgsConstructor
+@NoArgsConstructor
 public class PrescritId implements Serializable {
 
     private Long consultationId;
