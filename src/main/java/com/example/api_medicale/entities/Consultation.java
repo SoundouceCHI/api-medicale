@@ -1,15 +1,13 @@
 package com.example.api_medicale.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,4 +19,13 @@ public class Consultation{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long numero;
     private LocalDate date;
+
+    @ManyToOne
+    private Medecin medecin;
+    @ManyToOne
+    private Patient patient;
+
+    @OneToMany(mappedBy = "consultation")
+    private List<Prescrit> prescriptions;
+
 }

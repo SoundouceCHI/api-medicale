@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "medicament")
 @AllArgsConstructor
@@ -17,4 +20,10 @@ public class Medicament {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long code;
     private String libelle;
+
+    @ManyToMany
+    private List<Consultation> consultations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "medicament")
+    private List<Prescrit> prescriptions;
 }

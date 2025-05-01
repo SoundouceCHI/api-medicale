@@ -1,39 +1,30 @@
 package com.example.api_medicale.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="patient")
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 public class Patient extends BaseEntity{
 
     private String numSecuSoc;
     private String nom;
     private String prenom;
 
-
-    public String getNumSecuSoc() {
-        return numSecuSoc;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public void setNumSecuSoc(String numSecuSoc) {
-        this.numSecuSoc = numSecuSoc;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
+    @OneToMany( mappedBy = "patient", cascade = CascadeType.ALL)
+    List<Consultation> consultations= new ArrayList<>();
 
 }
