@@ -15,10 +15,9 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Medicament {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long code;
+public class Medicament extends BaseEntity{
+
+    private long code;
     private String libelle;
 
     @ManyToMany

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatientDto extends BaseDto{
+public class PatientDto extends UserDto{
     private String numSecuSoc;
     private String nom;
     private String prenom;

@@ -12,8 +12,8 @@ import java.util.Objects;
 @NoArgsConstructor
 public class PrescritId implements Serializable {
 
-    private Long consultationId;
-    private Long medicamentId;
+    private long consultationId;
+    private long medicamentId;
 
     @Override
     public boolean equals(Object o) {

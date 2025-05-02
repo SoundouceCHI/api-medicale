@@ -14,10 +14,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Consultation{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long numero;
+public class Consultation extends BaseEntity{
+
+    private long numero;
     private LocalDate date;
 
     @ManyToOne

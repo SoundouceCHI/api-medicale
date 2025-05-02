@@ -8,17 +8,20 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public class MedecinService implements IMedecinService{
-    private IMedecinRepository repository;
-    private IMedecinMapper mapper;
+    private final IMedecinRepository repository;
+    private final IMedecinMapper mapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public MedecinService(IMedecinRepository repository, IMedecinMapper mapper){
+    public MedecinService(IMedecinRepository repository, IMedecinMapper mapper, PasswordEncoder passwordEncoder) {
         this.repository= repository;
         this.mapper = mapper;
+        this.passwordEncoder = passwordEncoder;
     }
     @Override
     public Page<MedecinDto> findAll(String search, int page, int size) {
@@ -30,6 +33,8 @@ public class MedecinService implements IMedecinService{
     @Override
     public MedecinDto save(MedecinDto dto) {
         Medecin m =  this.toEntity(dto);
+        m.setPassword(passwordEncoder.encode("apimed123"));
+        m.setRole("ROLE_MEDECIN");
         return this.toDTO(repository.save(m));
     }
 

@@ -1,10 +1,7 @@
 package com.example.api_medicale.entities;
 
 import com.example.api_medicale.tools.PrescritId;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,10 +18,12 @@ public class Prescrit {
 
     @ManyToOne
     @MapsId("consultationId")
+    @JoinColumn(name = "consultation_id", referencedColumnName = "id")
     private Consultation consultation;
 
     @ManyToOne
     @MapsId("medicamentId")
+    @JoinColumn(name = "medicament_id", referencedColumnName = "id")
     private Medicament medicament;
 
     private int nbPrises;

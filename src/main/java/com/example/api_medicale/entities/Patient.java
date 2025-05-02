@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @Setter
 @Getter
-public class Patient extends BaseEntity{
+public class Patient extends User{
 
     private String numSecuSoc;
     private String nom;

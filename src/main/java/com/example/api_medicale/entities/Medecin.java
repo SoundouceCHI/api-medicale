@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name="medecin")
 @Getter
 @Setter
-public class Medecin extends BaseEntity{
+public class Medecin extends User{
     private String matricule;
     private String nom;
     private String prenom;

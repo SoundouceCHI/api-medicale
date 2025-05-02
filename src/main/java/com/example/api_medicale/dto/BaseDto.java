@@ -17,4 +17,5 @@ public class BaseDto {
     private long id;
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDate dateCreation;
+    private int version;
 }

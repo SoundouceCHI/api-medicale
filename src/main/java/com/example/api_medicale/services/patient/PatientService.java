@@ -8,6 +8,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,10 +17,12 @@ import java.util.List;
 public class PatientService implements IPatientService {
     private final IPatientRepository repository;
     private final PatientMapper patientMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public PatientService(IPatientRepository repository ,PatientMapper patientMapper) {
+    public PatientService(IPatientRepository repository ,PatientMapper patientMapper, PasswordEncoder passwordEncoder) {
         this.repository = repository;
        this.patientMapper= patientMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -30,6 +33,8 @@ public class PatientService implements IPatientService {
     @Override
     public PatientDto save(PatientDto dto) {
         Patient entity = toEntity(dto);
+        entity.setPassword(passwordEncoder.encode("apimed123"));
+        entity.setRole("ROLE_PATIENT");
         return toDTO(repository.save(entity));
     }
 

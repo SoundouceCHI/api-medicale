@@ -16,6 +16,8 @@ public class DataInitializer {
             if (userRepository.findByUsername("test1").isEmpty()) {
                 User user = new User();
                 user.setUsername("test1");
+                user.setPassword(passwordEncoder.encode("123456"));
+                user.setRole("ROLE_ADMIN");
                 userRepository.save(user);
             }
         };

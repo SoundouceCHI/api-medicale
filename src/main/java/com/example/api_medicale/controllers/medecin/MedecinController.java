@@ -29,6 +29,7 @@ public class MedecinController {
     @PostMapping
     @Operation(summary = "Creer un nouveau medecin")
     public MedecinDto create(@RequestBody MedecinDto medecinDto){
+
         return medecinService.save(medecinDto);
     }
     @GetMapping("/{id}")
